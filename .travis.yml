@@ -10,3 +10,4 @@ script:
   - echo 'Installing Deps!'
   - yarn
   - echo 'Testing!'
+  - yarn test

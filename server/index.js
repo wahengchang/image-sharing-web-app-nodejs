@@ -10,11 +10,7 @@
     app.use('/user', require('./routers/users'))
     app.use('/me', require('./routers/me'))
 
-    app.get('/', async (req, res) => {
-      const title = `title-${new Date().getTime()}`
-      return res.send(`Hello World! : ${title}`)
-    })
-    app.use(express.static('public'))
+    app.use(express.static('build'))
 
     const port = process.env.PORT || 4000
   
