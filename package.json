@@ -22,14 +22,42 @@
     "uuidv4": "^6.2.12"
   },
   "devDependencies": {
-    "jest": "^27.2.4",
     "nodemon": "^2.0.13",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "test": "jest --coverage",
     "dev": "npx nodemon server/index.js ",
     "start": "node server/index.js ",
-    "kill": "kill -9 $(lsof -t -i:3000)"
+    "kill": "kill -9 $(lsof -t -i:3000)",
+    "start:f2e": "react-scripts start",
+    "build:f2e": "react-scripts build",
+    "test:f2e": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
