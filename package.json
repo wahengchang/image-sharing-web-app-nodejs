@@ -37,6 +37,7 @@
     "dev": "npx nodemon server/index.js ",
     "start": "node server/index.js ",
     "kill": "kill -9 $(lsof -t -i:3000)",
+    "build": "npm run build:f2e",
     "start:f2e": "react-scripts start",
     "build:f2e": "react-scripts build",
     "test:f2e": "react-scripts test",
