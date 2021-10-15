@@ -1,6 +1,7 @@
 (async () => {
     const express = require('express')
     const app = express()
+    const {ENV} = process.env
     
     const DB = require('./lib/Db')
     await DB.init()
@@ -10,7 +11,9 @@
     app.use('/user', require('./routers/users'))
     app.use('/me', require('./routers/me'))
 
-    app.use(express.static('build'))
+    if(ENV === 'prod') {
+      app.use(express.static('build'))
+    }
 
     const port = process.env.PORT || 4000
   
