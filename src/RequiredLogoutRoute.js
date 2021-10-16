@@ -11,12 +11,12 @@ export default function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user ? (
+        !auth.user ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/public",
               state: { from: location }
             }}
           />

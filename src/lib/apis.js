@@ -13,7 +13,7 @@ const getErrorMessage = (responseFromApi) => {
 export const userLogin = async (username, password) => {
     try {
         const payload = { username, password }
-        const res = await axios.post(`/user/login`, payload)
+        const res = await axios.post(`/apis/user/login`, payload)
         return res.data
     }
     catch(e) {
@@ -29,7 +29,23 @@ export const getMe = async (token) => {
               'Authorization': 'Bearer ' + token
             }
           }
-        const res = await axios.get(`/me`, payload)
+        const res = await axios.get(`/apis/me`, payload)
+        return res.data
+    }
+    catch(e) {
+        const errorMessage = getErrorMessage(e)
+        throw errorMessage
+    }
+}
+
+export const getImageList = async (token) => {
+    try {
+        const payload = {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            }
+          }
+        const res = await axios.get(`/apis/me`, payload)
         return res.data
     }
     catch(e) {

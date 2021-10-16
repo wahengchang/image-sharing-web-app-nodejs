@@ -7,9 +7,9 @@
     await DB.init()
     app.use(require('./middleware/expressFunction'))
   
-    app.use('/images', require('./routers/images'))
-    app.use('/user', require('./routers/users'))
-    app.use('/me', require('./routers/me'))
+    app.use('/apis/images', require('./routers/images'))
+    app.use('/apis/user', require('./routers/users'))
+    app.use('/apis/me', require('./routers/me'))
 
     if(ENV === 'prod') {
       app.use(express.static('build'))
