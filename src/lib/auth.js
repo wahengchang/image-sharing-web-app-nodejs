@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useContext, createContext, useEffect } from "react";
 import {userLogin, getMe} from './apis'
+import {setCookie, getCookie} from './cookieHandler'
 
 export const authContext = createContext();
 
@@ -9,35 +10,13 @@ export function useAuth() {
     return useContext(authContext);
 }
 
-function setCookie(cname, cvalue, exdays = 1) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-  
-function getCookie(cname) {
-    let name = cname + "=";
-    let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
 const fakeAuth = {
     signin: async function(username, password) {
         const res = await userLogin(username, password)
         return res
     },
-    getUser: async function(token) {
-        const res = await getMe(token)
+    getUser: async function() {
+        const res = await getMe()
         return res
     },
     signout() {
@@ -60,7 +39,10 @@ export function useProvideAuth() {
         try {
             const userItem = await fakeAuth.signin(username, password)
             setUser(userItem)
+            console.log('userItem: ', userItem)
             setCookie('u', userItem.token)
+            console.log('-=-=- set cookie')
+            console.log(getCookie('u'))
         }
         catch(e) {
             console.error('[useProvideAuth.signin]: ', e)
@@ -70,9 +52,7 @@ export function useProvideAuth() {
 
     const loginWithCookie = async () => {
         try {
-            const token = getCookie('u')
-            console.log('token: ', token)
-            const userItem = await fakeAuth.getUser(token)
+            const userItem = await fakeAuth.getUser()
 
             if(!user) {
                 setUser(userItem)
@@ -88,8 +68,9 @@ export function useProvideAuth() {
 
     const signout = async (username, password) => {
         try {
-            const userItem = await fakeAuth.signout()
+            await fakeAuth.signout()
             setUser(null)
+            console.log('[signout] clean cookie')
             setCookie('u', '')
         }
         catch(e) {
@@ -99,12 +80,15 @@ export function useProvideAuth() {
     };
 
     useEffect(async () => {
+        const cookie = getCookie('u')
+        if(!cookie) return
+
         const isLogin = await loginWithCookie()
 
         if(isLogin) return 
 
         return signout()
-    });
+    }, []);
 
     return {
         user,

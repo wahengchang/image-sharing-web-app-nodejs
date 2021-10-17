@@ -20,8 +20,8 @@ describe('[/signup]', ()=>{
         const error = JSON.parse(res.error.text)
         expect(res.statusCode).toEqual(400);
         expect(res.status).toEqual(400);
-        expect(error.errorCode).toEqual('auth_not_invalid');
-        expect(error.errorMessage).toEqual(getErrorObject('auth_not_invalid'));
+        expect(error.errorCode).toEqual('auth_not_valid');
+        expect(error.errorMessage).toEqual(getErrorObject('auth_not_valid'));
         expect(error.errors[0].value).toEqual(password);
         expect(error.errors[0].msg).toEqual('Invalid value');
         expect(error.errors[0].param).toEqual('password');
@@ -42,8 +42,8 @@ describe('[/signup]', ()=>{
 
         expect(res.statusCode).toEqual(400);
         expect(res.status).toEqual(400);
-        expect(error.errorCode).toEqual('auth_not_invalid');
-        expect(error.errorMessage).toEqual(getErrorObject('auth_not_invalid'));
+        expect(error.errorCode).toEqual('auth_not_valid');
+        expect(error.errorMessage).toEqual(getErrorObject('auth_not_valid'));
         expect(error.errors.length).toEqual(1);
         expect(error.errors[0].value).toEqual(username);
         expect(error.errors[0].msg).toEqual('Invalid value');
@@ -65,8 +65,8 @@ describe('[/signup]', ()=>{
 
         expect(res.statusCode).toEqual(400);
         expect(res.status).toEqual(400);
-        expect(error.errorCode).toEqual('auth_not_invalid');
-        expect(error.errorMessage).toEqual(getErrorObject('auth_not_invalid'));
+        expect(error.errorCode).toEqual('auth_not_valid');
+        expect(error.errorMessage).toEqual(getErrorObject('auth_not_valid'));
         expect(error.errors.length).toEqual(2);
         expect(error.errors[0].value).toEqual(username);
         expect(error.errors[0].msg).toEqual('Invalid value');

@@ -1,0 +1,15 @@
+.thumbnail {
+  width: 100%;
+}
+
+.tableContainer {
+
+}
+
+.tableContainer table {
+  border-collapse: collapse;
+}
+
+.tableContainer table, th, td {
+  border: 1px solid gray;
+}

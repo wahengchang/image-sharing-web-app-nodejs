@@ -10,6 +10,7 @@
     app.use('/apis/images', require('./routers/images'))
     app.use('/apis/user', require('./routers/users'))
     app.use('/apis/me', require('./routers/me'))
+    app.use('/upload', require('./routers/upload'))
 
     if(ENV === 'prod') {
       app.use(express.static('build'))

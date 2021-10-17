@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getCookie} from './cookieHandler'
 
 const getErrorMessage = (responseFromApi) => {
     try {
@@ -8,7 +9,6 @@ const getErrorMessage = (responseFromApi) => {
         return responseFromApi.message
     }
 }
-
 
 export const userLogin = async (username, password) => {
     try {
@@ -22,8 +22,9 @@ export const userLogin = async (username, password) => {
     }
 }
 
-export const getMe = async (token) => {
+export const getMe = async () => {
     try {
+        const token = getCookie('u')
         const payload = {
             headers: {
               'Authorization': 'Bearer ' + token
@@ -38,14 +39,38 @@ export const getMe = async (token) => {
     }
 }
 
-export const getImageList = async (token) => {
+export const getImageList = async () => {
     try {
+        const token = getCookie('u')
         const payload = {
             headers: {
               'Authorization': 'Bearer ' + token
             }
           }
-        const res = await axios.get(`/apis/me`, payload)
+        const res = await axios.get(`/apis/images`, payload)
+        return res.data
+    }
+    catch(e) {
+        const errorMessage = getErrorMessage(e)
+        throw errorMessage
+    }
+}
+
+
+export const uploadImage = async (payload) => {
+    try {
+        const res = await axios.post(`/upload`, payload)
+        return res.data
+    }
+    catch(e) {
+        const errorMessage = getErrorMessage(e)
+        throw errorMessage
+    }
+}
+
+export const createImage = async (payload) => {
+    try {
+        const res = await axios.post(`/apis/images`, payload)
         return res.data
     }
     catch(e) {

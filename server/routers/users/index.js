@@ -22,8 +22,8 @@ router.post('/signup',
         return res
           .status(StatusCodes.BAD_REQUEST)
           .json({
-            errorCode: 'auth_not_invalid',
-            errorMessage: getErrorObject('auth_not_invalid'),
+            errorCode: 'auth_not_valid',
+            errorMessage: getErrorObject('auth_not_valid'),
             errors: errors.array()
           });
       }
@@ -56,8 +56,8 @@ router.post('/login',
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({
-          errorCode: 'auth_not_invalid',
-          errorMessage: getErrorObject('auth_not_invalid'),
+          errorCode: 'auth_not_valid',
+          errorMessage: getErrorObject('auth_not_valid'),
           errors: errors.array()
         });
     }

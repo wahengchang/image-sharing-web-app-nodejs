@@ -2,17 +2,17 @@ import './App.css'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Me from './pages/Me'
-import Protect from './pages/Protect'
+import Images from './pages/Images'
+import ImagesCreate from './pages/ImagesCreate'
 import AuthButton from './components/AuthButton'
 import PrivateRoute from './PrivateRoute'
 import RequiredLogoutRoute from './RequiredLogoutRoute'
-import {useAuth, ProvideAuth} from './lib/auth'
+import {ProvideAuth} from './lib/auth'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect,
 } from "react-router-dom";
 
 export default function AuthExample() {
@@ -27,7 +27,7 @@ export default function AuthExample() {
                   <Link to="/public">Home</Link>
                 </li>
                 <li>
-                  <Link to="/protected">Protected Page</Link>
+                  <Link to="/images">Images Page</Link>
                 </li>
                 <li> 
                   <AuthButton />
@@ -43,12 +43,18 @@ export default function AuthExample() {
               <RequiredLogoutRoute path="/login">
                 <Login />
               </RequiredLogoutRoute>
-              <PrivateRoute path="/protected">
-                <Protect />
+              <PrivateRoute path="/images/create">
+                <ImagesCreate />
+              </PrivateRoute>
+              <PrivateRoute path="/images">
+                <Images />
               </PrivateRoute>
               <PrivateRoute path="/me">
                 <Me />
               </PrivateRoute>
+              <Route path="/">
+                <Home />
+              </Route>
             </Switch>
           </div>
         </div>

@@ -22,6 +22,10 @@ const Image = sequelize.define('Image', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  imageUrlId: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 })
 
 User.hasMany(Image, {as: 'Image', foreignKey: 'userId'})
