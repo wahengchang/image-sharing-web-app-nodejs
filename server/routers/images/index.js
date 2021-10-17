@@ -76,8 +76,13 @@ router.get('/:id', requiredLogin, async (req, res) => {
 
 router.get('/', requiredLogin, async (req, res) => {
   try {
+    const {user} = res.locals
     const ImageCon = new ImageController()
-    const foundItemList = await ImageCon.list()
+    const foundItemList = await ImageCon.list({
+      where: {
+        userId: user.id,
+      }
+    })
     res.status(StatusCodes.OK)
     return res.json(foundItemList);
   }

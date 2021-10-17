@@ -30,17 +30,17 @@ export default function LoginPage() {
     })
   }
 
-  const onClickLogin = async () => {
+  const onClickSignup = async () => {
     setError(null);
     setLoading(true);
 
     try {
-      await auth.signin(username.value, password.value )
+      await auth.signup(username.value, password.value )
       setLoading(false)
       history.push('/')
     }
     catch(error) {
-      const {errorValidation} = error
+      const {errorValidation = []} = error
 
       console.log('error: ', error)
 
@@ -57,7 +57,7 @@ export default function LoginPage() {
 
   return (
     <div class='formPageContainer'>
-      <h3>Login</h3>
+      <h3>Signup</h3>
       <div class='formContainer'>
         <div>
           Username<br />
@@ -70,7 +70,7 @@ export default function LoginPage() {
           {errorValidList.password && <><br /><small style={{ color: 'red' }}>{errorValidList.password}</small><br /></>}
         </div>
         <div style={{ marginTop: 10 }}>
-          <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={onClickLogin} disabled={loading} /><br />
+          <input type="button" value={loading ? 'Loading...' : 'Signup'} onClick={onClickSignup} disabled={loading} /><br />
         </div>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
       </div>

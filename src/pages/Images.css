@@ -8,8 +8,21 @@
 
 .tableContainer table {
   border-collapse: collapse;
+  width: 100%;
 }
 
 .tableContainer table, th, td {
   border: 1px solid gray;
+}
+
+.buttonTag {  
+  width: 115px;
+  height: 25px;
+  background: gray;
+  padding: 3px 10px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
 }

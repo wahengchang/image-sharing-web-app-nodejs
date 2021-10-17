@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useContext, createContext, useEffect } from "react";
-import {userLogin, getMe} from './apis'
+import {userLogin, getMe, userSignup} from './apis'
 import {setCookie, getCookie} from './cookieHandler'
 
 export const authContext = createContext();
@@ -12,8 +12,10 @@ export function useAuth() {
 
 const fakeAuth = {
     signin: async function(username, password) {
-        const res = await userLogin(username, password)
-        return res
+        return userLogin(username, password)
+    },
+    signup: async function(username, password) {
+        return userSignup(username, password)
     },
     getUser: async function() {
         const res = await getMe()
@@ -39,10 +41,16 @@ export function useProvideAuth() {
         try {
             const userItem = await fakeAuth.signin(username, password)
             setUser(userItem)
-            console.log('userItem: ', userItem)
             setCookie('u', userItem.token)
-            console.log('-=-=- set cookie')
-            console.log(getCookie('u'))
+        }
+        catch(e) {
+            console.error('[useProvideAuth.signin]: ', e)
+            throw e
+        }
+    };
+    const signup = async (username, password) => {
+        try {
+            await fakeAuth.signup(username, password)
         }
         catch(e) {
             console.error('[useProvideAuth.signin]: ', e)
@@ -93,7 +101,8 @@ export function useProvideAuth() {
     return {
         user,
         signin,
-        signout
+        signout,
+        signup
     };
 }
 

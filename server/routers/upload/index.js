@@ -56,11 +56,14 @@ router.get('/:filename', requiredLogin, async (req, res) => {
             root: `${__dirname}/../../../${uploadFolderName}/`
         };
       
-        res.sendFile(filename, options, function (err) {  
-            if (err) {
-                next(err);
-            } else {
-                console.log('Sent:', filename);
+        return res.sendFile(filename, options, function (error) {  
+            if(error) {
+                return res
+                    .status(StatusCodes.FORBIDDEN)
+                    .json({
+                        errorCode: 'forbidden',
+                        errorMessage: getErrorObject('forbidden'),
+                    });
             }
         });
     }
@@ -79,6 +82,7 @@ router.get('/:filename', requiredLogin, async (req, res) => {
 router.post('/', requiredLogin, async (req, res) => {
   try {
     upload(req, res, function (err) {
+
       if (err instanceof multer.MulterError) {
           return res.status(500).json(err)
       } else if (err) {

@@ -1,5 +1,6 @@
 import './App.css'
 import Login from './pages/Login'
+import Signup from './pages/Signup'
 import Home from './pages/Home'
 import Me from './pages/Me'
 import Images from './pages/Images'
@@ -42,6 +43,9 @@ export default function AuthExample() {
               </Route>
               <RequiredLogoutRoute path="/login">
                 <Login />
+              </RequiredLogoutRoute>
+              <RequiredLogoutRoute path="/signup">
+                <Signup />
               </RequiredLogoutRoute>
               <PrivateRoute path="/images/create">
                 <ImagesCreate />

@@ -37,8 +37,8 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "dev": "mkdri upload; npx nodemon --ignore './src/**' server/index.js ",
-    "start": "mkdri upload; ENV=prod node server/index.js ",
+    "dev": "mkdir upload; npx nodemon --ignore './src/**' server/index.js ",
+    "start": "mkdir upload; ENV=prod node server/index.js ",
     "kill": "kill -9 $(lsof -t -i:3000)",
     "build": "npm run build:f2e",
     "dev:f2e": "react-scripts start",

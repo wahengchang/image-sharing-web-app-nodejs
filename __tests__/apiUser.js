@@ -23,7 +23,7 @@ describe('[/signup]', ()=>{
         expect(error.errorCode).toEqual('auth_not_valid');
         expect(error.errorMessage).toEqual(getErrorObject('auth_not_valid'));
         expect(error.errors[0].value).toEqual(password);
-        expect(error.errors[0].msg).toEqual('Invalid value');
+        expect(error.errors[0].msg).toEqual('password min 8 charaters');
         expect(error.errors[0].param).toEqual('password');
         expect(error.errors[0].location).toEqual('body');
     })
@@ -46,7 +46,7 @@ describe('[/signup]', ()=>{
         expect(error.errorMessage).toEqual(getErrorObject('auth_not_valid'));
         expect(error.errors.length).toEqual(1);
         expect(error.errors[0].value).toEqual(username);
-        expect(error.errors[0].msg).toEqual('Invalid value');
+        expect(error.errors[0].msg).toEqual('username min 3 charaters');
         expect(error.errors[0].param).toEqual('username');
         expect(error.errors[0].location).toEqual('body');
     })
@@ -69,11 +69,11 @@ describe('[/signup]', ()=>{
         expect(error.errorMessage).toEqual(getErrorObject('auth_not_valid'));
         expect(error.errors.length).toEqual(2);
         expect(error.errors[0].value).toEqual(username);
-        expect(error.errors[0].msg).toEqual('Invalid value');
+        expect(error.errors[0].msg).toEqual('username min 3 charaters');
         expect(error.errors[0].param).toEqual('username');
         expect(error.errors[0].location).toEqual('body');
         expect(error.errors[1].value).toEqual(password);
-        expect(error.errors[1].msg).toEqual('Invalid value');
+        expect(error.errors[1].msg).toEqual('password min 8 charaters');
         expect(error.errors[1].param).toEqual('password');
         expect(error.errors[1].location).toEqual('body');
     })

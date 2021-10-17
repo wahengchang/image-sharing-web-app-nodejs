@@ -22,6 +22,22 @@ describe('[UserController] ', ()=>{
         expect(createdItem.password == undefined).toBe(true)
     })
 
+    it('[UserController] should able to create() and have findById()', async ()=>{
+        const UserCon = new UserController()
+        const username = `username-${new Date().getTime()}`
+        const password = `password-${new Date().getTime()}`
+        await UserCon.init()
+        await UserCon.create({username, password})
+
+        try {
+            await UserCon.create({username, password})
+        }
+        catch(e) {
+            
+            expect(e.errors[0].message).toEqual('Username address already in use!');
+        }
+    })
+
     it('[UserController] should able to update()', async ()=>{
         const UserCon = new UserController()
         const username = `username-${new Date().getTime()}`

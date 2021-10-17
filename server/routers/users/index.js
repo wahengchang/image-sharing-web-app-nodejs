@@ -1,7 +1,7 @@
 const UserController = require('./controller')
 const auth = require('../../middleware/auth')
 const {StatusCodes} = require('http-status-codes')
-const { body, validationResult } = require('express-validator');
+const { body, validationResult, checkSchema } = require('express-validator');
 const {getErrorObject} = require('../../../error')
 const bcrypt = require('bcrypt')
 
@@ -12,9 +12,9 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.post('/signup', 
-  body('username').isLength({ min: 3 }),
-  body('password').isLength({ min: 8 }),
+const schema = require('./schema')
+
+router.post('/signup', checkSchema(schema),
   async function (req, res) {
     try{
       const errors = validationResult(req);
@@ -40,8 +40,8 @@ router.post('/signup',
       return res.json(newUser)
     }
     catch(e) {
-      console.error(e)
-      return res.responseDefaultError(StatusCodes.INTERNAL_SERVER_ERROR)
+      const msg = e.errors.map(item => item.message).join(',')
+      return res.responseDefaultError(StatusCodes.INTERNAL_SERVER_ERROR, msg)
     }
   })
 

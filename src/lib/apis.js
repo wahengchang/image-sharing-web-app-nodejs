@@ -1,12 +1,12 @@
 import axios from "axios";
 import {getCookie} from './cookieHandler'
 
-const getErrorMessage = (responseFromApi) => {
+const getErrorMessage = (responseFromApi, key = 'errorMessage') => {
     try {
-        return `[${responseFromApi.response.data.errorCode}]${responseFromApi.response.data.errorMessage}`
+        return responseFromApi.response.data[key]
     }
     catch(e) {
-        return responseFromApi.message
+        return null
     }
 }
 
@@ -18,7 +18,21 @@ export const userLogin = async (username, password) => {
     }
     catch(e) {
         const errorMessage = getErrorMessage(e)
-        throw errorMessage
+        const errorValidation = getErrorMessage(e, 'errors')
+        throw {errorMessage, errorValidation}
+    }
+}
+
+export const userSignup = async (username, password) => {
+    try {
+        const payload = { username, password }
+        const res = await axios.post(`/apis/user/signup`, payload)
+        return res.data
+    }
+    catch(e) {
+        const errorMessage = getErrorMessage(e)
+        const errorValidation = getErrorMessage(e, 'errors')
+        throw {errorMessage, errorValidation}
     }
 }
 

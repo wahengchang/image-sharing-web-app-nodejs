@@ -13,7 +13,7 @@ const responseDefaultError = (res) => (STATUS_CODE, customMessage = null) => {
     const msg = customMessage || getReasonPhrase(STATUS_CODE)
     res.status(STATUS_CODE)
     return res.json({
-        error: msg
+        errorMessage: msg
       });
 }
 

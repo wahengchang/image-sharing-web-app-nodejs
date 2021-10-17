@@ -1,0 +1,9 @@
+.formPageContainer {
+  margin: auto;
+  text-align: center;
+}
+
+.formContainer {
+  border: 1px solid gray;
+  padding: 30px;
+}

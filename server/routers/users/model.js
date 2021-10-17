@@ -10,7 +10,21 @@ const User = sequelize.define('User', {
   },
   username: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isUnique: (value, next) => {
+        User.findAll({
+          where: { username: value },
+          attributes: ['id'],
+        })
+          .then((user) => {
+            if (user.length != 0)
+              next(new Error('Username address already in use!'));
+            next();
+          })
+          .catch((onError) => console.log(onError));
+      },
+    },
   },
   password: {
     type: Sequelize.STRING,
