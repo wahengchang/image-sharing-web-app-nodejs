@@ -34,6 +34,7 @@ const upload = multer({
 router.get('/:filename', requiredLogin, async (req, res) => {
     try {
         console.log('res.locals.user: ', res.locals.user)
+        console.log(' -=-=-=-=-=-=-1 ')
         const {filename} = req.params  
         const {user} = res.locals
         const ImageCon = new ImageController()
@@ -43,7 +44,9 @@ router.get('/:filename', requiredLogin, async (req, res) => {
                 imageUrlId: filename
             }
         })
+        console.log(' -=-=-=-=-=-=-2 ')
         if(foundItemList.length <=0) {
+            console.log(' -=-=-=-=-=-=-3 ')
             return res
             .status(StatusCodes.FORBIDDEN)
             .json({
@@ -56,7 +59,9 @@ router.get('/:filename', requiredLogin, async (req, res) => {
             root: `${__dirname}/../../../${uploadFolderName}/`
         };
       
+        console.log(' -=-=-=-=-=-=-4 ')
         return res.sendFile(filename, options, function (error) {  
+            console.log(' -=-=-=-=-=-=-5 ', error)
             if(error) {
                 return res
                     .status(StatusCodes.FORBIDDEN)
