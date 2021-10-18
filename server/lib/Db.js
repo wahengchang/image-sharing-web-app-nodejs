@@ -18,7 +18,7 @@ class DB {
     return this.sequelize
   }
 
-  init(options = {}){
+  async init(options = {}){
     if(this.isInit) return
 
     const {isPurge = false} = options
@@ -29,11 +29,13 @@ class DB {
       console.log('[INFO] going to purge')
     }
 
-    return this.sequelize.sync(dbOptions).then(() => {
-      console.log(`Database & tables created!`)
-      this.isInit = true
-      return
-    })
+    await this.sequelize.sync(dbOptions)
+    console.log(`Database & tables created!`)
+    await require('../routers/images/model').sync(dbOptions)
+    console.log(`ImageModel created!`)
+    await require('../routers/users/model').sync(dbOptions)
+    console.log(`UserModel created!`)
+    this.isInit = true
   }
 }
 
