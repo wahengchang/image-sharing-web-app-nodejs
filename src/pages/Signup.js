@@ -74,7 +74,7 @@ export default function LoginPage() {
         </div>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
       </div>
-      <Link to='/signup'> Signup </Link>
+      <Link to='/login'> Login </Link>
     </div>
   );
 }
