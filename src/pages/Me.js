@@ -11,24 +11,29 @@ export default function ProtectedPage() {
   const {user} = auth
   const {id, username, updatedAt, uploadedImageAmount} = user
 
-  return <div>
+  return <div class='formPageContainer'>
       <h3>Hi {username}</h3>
       <div>
-        <div> ID: {id}</div>
-        
-        <div> uploadedImageAmount: {uploadedImageAmount}</div>
 
-        <div> updatedAt: {updatedAt}</div>
-
-        
-        <button
-          onClick={() => {
-            auth.signout(() => history.push("/"));
-            add(`Logout Success`)
-          }}
-        >
-          Logout
-        </button>
+        <div className="formGroup">
+          <div> <b>ID:</b> {id}</div>
+        </div>
+        <div className="formGroup">
+          <div> <b>uploadedImageAmount:</b> {uploadedImageAmount}</div>
+        </div>
+        <div className="formGroup">
+          <div> <b>updatedAt:</b> {updatedAt}</div>
+        </div>
+        <div className="formGroup">
+          <button
+            onClick={() => {
+              auth.signout(() => history.push("/"));
+              add(`Logout Success`)
+            }}
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>;
 }

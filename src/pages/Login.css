@@ -11,3 +11,36 @@
 .formGroup {
   margin-top: 10px;
 }
+
+label[for="file-input"] {
+  display: block;
+  margin-bottom: 1em;
+  font-size: 1em;
+  color: #fff;
+  opacity: .9;
+  font-weight: bold;
+}
+
+input[type="file"] {
+  cursor: pointer !Important;
+}
+input[type="file"]::-webkit-file-upload-button {
+  border: none;
+  padding: 5px 12px;
+  background: gray;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+  border-radius: 20px;
+}
+input[type="file"]::-ms-browse {
+  border: none;
+  padding: 5px 12px;
+  background: gray;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+  border-radius: 20px;
+}
