@@ -13,13 +13,6 @@ export default function AuthButton() {
     return auth.user ? (
       <span>
         <Link to='/me'>Hi {auth.user.username}</Link>
-        <a
-          onClick={() => {
-            auth.signout(() => history.push("/"));
-          }}
-        >
-          log out
-        </a>
       </span>
     ) : (
       <span>Logged in</span>

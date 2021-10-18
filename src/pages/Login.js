@@ -9,8 +9,10 @@ import {
   useLocation,
   useHistory
 } from "react-router-dom";
+import { useToasts } from "../components/ToastContainer";
 
 export default function LoginPage() {
+  const {add} = useToasts()
   const history = useHistory();
   const location = useLocation();
   const auth = useAuth();
@@ -21,15 +23,6 @@ export default function LoginPage() {
   const [errorValidList, setErrorValidList] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const errorValidationDisplay = (errorItem) => {
-    const {param, msg} = errorItem
-
-    setErrorValidList({
-      ...errorValidList,
-      [param]: msg
-    })
-  }
-
   const onClickLogin = async () => {
     setError(null);
     setLoading(true);
@@ -38,9 +31,10 @@ export default function LoginPage() {
       await auth.signin(username.value, password.value )
       setLoading(false)
       history.push('/')
+      add(`Hi, ${username.value} Login Success`)
     }
     catch(error) {
-      const {errorValidation} = error
+      const {errorValidation = []} = error
 
       console.log('error: ', error)
 
@@ -64,12 +58,12 @@ export default function LoginPage() {
           <input type="text" {...username} autoComplete="username" name='username'/>
           {errorValidList.username && <><br /><small style={{ color: 'red' }}>{errorValidList.username}</small><br /></>}
         </div>
-        <div style={{ marginTop: 10 }}>
+        <div className="formGroup">
           Password<br />
           <input type="password" {...password} autoComplete="password" name='password'/>
           {errorValidList.password && <><br /><small style={{ color: 'red' }}>{errorValidList.password}</small><br /></>}
         </div>
-        <div style={{ marginTop: 10 }}>
+        <div className="formGroup">
           <input id='loginSubmit' type="button" value={loading ? 'Loading...' : 'Login'} onClick={onClickLogin} disabled={loading} /><br />
         </div>
         {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />

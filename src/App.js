@@ -15,12 +15,14 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import { ToastProvider } from "./components/ToastContainer";
 
 export default function AuthExample() {
   return (
     <ProvideAuth>
       <Router>
       <div class='container'>
+        <ToastProvider>
           <header>
             <div class="nav">
               <ul>
@@ -61,6 +63,7 @@ export default function AuthExample() {
               </Route>
             </Switch>
           </div>
+          </ToastProvider>
         </div>
       </Router>
     </ProvideAuth>

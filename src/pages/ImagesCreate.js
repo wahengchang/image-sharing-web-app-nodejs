@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { uploadImage, createImage } from "../lib/apis";
 import { useAuth } from '../lib/auth'
+import { useToasts } from "../components/ToastContainer";
 
 export default function Images() {
+  const {add} = useToasts()
   const auth = useAuth();
   const { user } = auth
   const { username, } = user
@@ -20,6 +22,7 @@ export default function Images() {
       const res2 = await createImage({
         title, description, imageUrl
       })
+      add(`${title} image upload Success`)
     }
     catch (e) {
       console.log('onSubmit: ', e)
@@ -32,9 +35,9 @@ export default function Images() {
 
 
   return (
-    <div className="container">
+    <div class='formPageContainer'>
       <h3>{username} Create Image</h3>
-      <div className="row">
+      <div className="formContainer">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <input type="text" name="title" value={title} onChange={({ target }) => setTitle(target.value)} required />

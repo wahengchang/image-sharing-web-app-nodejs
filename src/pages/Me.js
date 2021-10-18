@@ -2,8 +2,10 @@ import {
   useHistory,
 } from "react-router-dom";
 import {useAuth} from '../lib/auth'
+import { useToasts } from "../components/ToastContainer";
 
 export default function ProtectedPage() {
+  const {add} = useToasts()
   const history = useHistory();
   const auth = useAuth();
   const {user} = auth
@@ -22,6 +24,7 @@ export default function ProtectedPage() {
         <button
           onClick={() => {
             auth.signout(() => history.push("/"));
+            add(`Logout Success`)
           }}
         >
           Logout
