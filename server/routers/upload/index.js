@@ -93,9 +93,8 @@ router.post('/', requiredLogin, async (req, res) => {
       } else if (err) {
           return res.status(500).json(err)
       }
-
-      const host = req.get('host')
-      const imageUrl = `${host}/${uploadFolderName}/${req.file.filename}`
+      const origin = req.get('origin')
+      const imageUrl = `${origin}/${uploadFolderName}/${req.file.filename}`
 
       console.log(req.file)
 
