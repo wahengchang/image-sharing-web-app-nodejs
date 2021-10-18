@@ -3,6 +3,7 @@ const pageObject = {
 }
 const pageElement = {
     'menuProtectedTab' : '.nav li:nth-child(2)',
+    'menuMeTab' : '.nav li:nth-child(3)',
     'signupLinkOnLoginPage' : '#sigupButton',
     'signupSubmitButton' : '#signupSubmit',
     'loginSubmitButton' : '#loginSubmit',

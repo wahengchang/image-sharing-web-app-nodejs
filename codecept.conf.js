@@ -30,10 +30,10 @@ exports.config = {
       url: 'http://localhost:4000',
       show: false,
       browser: 'chromium'
-    }
+    },
   },
   include: {
-    I: './steps_file.js'
+    I: './f2eTest/steps_file.js'
   },
   mocha: {},
   name: 'image-sharing-web-app-nodejs',
@@ -49,20 +49,20 @@ exports.config = {
       enabled: true
     }
   },
-  async bootstrapAll() {
-    await startServer()
-  },
-  async bootstrap() {
-    if (isMainThread) {
-      await startServer()
-    }
-  },
-  async teardown() {
-    if (isMainThread) {
-      await stopServer()
-    }
-  },
-  async teardownAll() {
-    await stopServer()
-  },
+  // async bootstrapAll() {
+  //   await startServer()
+  // },
+  // async bootstrap() {
+  //   if (isMainThread) {
+  //     await startServer()
+  //   }
+  // },
+  // async teardown() {
+  //   if (isMainThread) {
+  //     await stopServer()
+  //   }
+  // },
+  // async teardownAll() {
+  //   await stopServer()
+  // },
 }

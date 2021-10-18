@@ -12,7 +12,7 @@ export default function AuthButton() {
   
     return auth.user ? (
       <span>
-        <Link to='/me'>Hi {auth.user.username}</Link>
+        <Link to='/me'>{auth.user.username}</Link>
       </span>
     ) : (
       <span>Logged in</span>

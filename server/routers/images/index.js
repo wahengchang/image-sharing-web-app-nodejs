@@ -15,21 +15,18 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post('/', requiredLogin, checkSchema(schema), async (req, res) => {
   try {
-    console.log('image create -=-=-=-=-  -=-=-=-=-=-=-1 ')
     const {title,description,imageUrl} = req.body
     const {user} = res.locals
     const userId = user.id
 
     const ImageCon = new ImageController()
     const createItem = await ImageCon.create({title,description,imageUrl,userId})
-    console.log('image create -=-=-=-=-  -=-=-=-=-=-=-2 ')
 
     res.status(StatusCodes.OK)
     return res.json(createItem);
   }
   catch(e) {
-    console.log('image create -=-=-=-=-  -=-=-=-=-=-=-3 ')
-    console.log(e)
+    console.log('Create image', e)
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

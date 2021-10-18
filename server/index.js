@@ -13,6 +13,9 @@
     app.use('/upload', require('./routers/upload'))
 
     if(ENV === 'prod') {
+      app.use('/signup',express.static('build'))
+      app.use('/login',express.static('build'))
+      app.use('/images',express.static('build'))
       app.use(express.static('build'))
     }
 

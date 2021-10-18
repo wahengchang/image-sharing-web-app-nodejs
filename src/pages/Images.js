@@ -44,7 +44,7 @@ export default function Images() {
       <tr key={item.id}>
         <td>{item.title}</td>
         <td>{item.description}</td>
-        <td><img class='thumbnail' src={'//'+item.imageUrl} /></td>
+        <td><img class='thumbnail' src={item.imageUrl} /></td>
         <td>{timeAgo(item.updatedAt)}</td>
       </tr>
     ))
