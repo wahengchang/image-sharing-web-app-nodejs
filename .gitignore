@@ -120,5 +120,5 @@ dist
 *.sql
 
 build
-upload/**
+upload/**.jpg
 output
